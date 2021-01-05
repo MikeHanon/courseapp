@@ -1,6 +1,8 @@
 <template>
   <app-layout>
-    <template #header> {{ course.title }} </template>
+    <template #header>
+         {{ course.title }}
+          </template>
     <div class="mx-8 px-4 py-4">
       <div class="text-2xl text-gray-500">
         {{ this.courseShow.episodes[this.currentKey].title }}
@@ -20,14 +22,18 @@
           v-for="(episode, index) in this.courseShow.episodes"
           v-bind:key="episode.id"
         >
-          <li class="mt-3">
-            Episode n°{{ index + 1 }} - {{ episode.title }}
+          <li class="mt-3 flex justify-between items-center">
+         <div>
+              Episode n°{{ index + 1 }} - {{ episode.title }}
             <button
               class="text-gray-700 focus:text-indigo-500 focus:outline-none"
               @click="switchEpisode(index)"
             >
               voir l'épisode
             </button>
+            </div>
+            <progress-button :episode-id="episode.id" :watched-episodes="watched" />
+         
           </li>
         </ul>
       </div>
@@ -37,13 +43,15 @@
 
 <script>
 import AppLayout from "@/Layouts/AppLayout";
+import ProgressButton from "./ProgessButton";
 
 export default {
   components: {
     AppLayout,
+    ProgressButton,
   },
 
-  props: ["course"],
+  props: ["course","watched"],
 
   data() {
     return {
