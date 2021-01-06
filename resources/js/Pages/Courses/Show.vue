@@ -16,7 +16,9 @@
       <div class="text-sm text-gray-700">
         {{ this.courseShow.episodes[this.currentKey].description }}
       </div>
-
+      <div class="py-6">
+        <progress-bar :watched-episodes="watched" :episodes="course.episodes" />
+      </div>
       <div class="mt6">
         <ul
           v-for="(episode, index) in this.courseShow.episodes"
@@ -44,11 +46,13 @@
 <script>
 import AppLayout from "@/Layouts/AppLayout";
 import ProgressButton from "./ProgessButton";
+import ProgressBar from "./ProgressBar";
 
 export default {
   components: {
     AppLayout,
     ProgressButton,
+    ProgressBar,
   },
 
   props: ["course","watched"],
